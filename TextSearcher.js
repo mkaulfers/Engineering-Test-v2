@@ -1,10 +1,5 @@
 const fs = require('fs');
 
-// For this take home assignment, we are asking you to complete the implementation of a text searching class found in `TextSearcher.js` by implementing the `#_init` and `#search` functions. At a high level, the `TextSearcher` 
-// class provides an interface for a consumer to search a file an arbitary number of times. The class is instantiated with a file path and the resulting instance provides a search interface where the consumer can search
-// for a specific query, and is returned an array of strings for each occurence of the search. The `search` function also takes a secondary `contextWords` argument which asks for a certain number of contextual words 
-// on either side of each found instance of the query word. See `TextSearcher.js` for more information
-
 class TextSearcher {
   fileContents = '';
 
@@ -75,6 +70,18 @@ class TextSearcher {
     return matches;
   }
 
+  /**
+   * Returns the offset of the first character of the word that is
+   * wordCountTarget words before the word that starts at startOffset.
+   *
+   * @param startOffset     [Number] The offset of the first character of the word
+   *                                  that we want to find the leading context of.
+   * @param wordCountTarget [Number] The number of words of context to provide on
+   *                                  the left side of the word.
+   *
+   * @return The offset of the first character of the word that is wordCountTarget
+   *         words before the word that starts at startOffset.
+   */
   getLeadingContextWordOffset(startOffset, wordCountTarget) {
     let wordCount = -1;
     let i = startOffset - 1;
@@ -93,6 +100,18 @@ class TextSearcher {
     return i + 1;
   }
 
+  /**
+   * Returns the offset of the first character after the word that is
+   * wordCountTarget words after the word that ends at endOffset.
+   *
+   * @param endOffset       [Number] The offset of the last character of the word
+   *                                  that we want to find the trailing context of.
+   * @param wordCountTarget [Number] The number of words of context to provide on
+   *                                  the right side of the word.
+   *
+   * @return The offset of the first character after the word that is wordCountTarget
+   *         words after the word that ends at endOffset.
+   */
   getTrailingContextWordOffset(endOffset, wordCountTarget) {
     let wordCount = -1;
     let i = endOffset;
@@ -111,10 +130,6 @@ class TextSearcher {
 
     return i;
   }
-
-
 }
-
-// Any needed utility classes/functions can just go in this file
 
 module.exports = TextSearcher;
